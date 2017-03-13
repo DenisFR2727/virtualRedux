@@ -21,24 +21,23 @@ function createStore(reducer, initialState) {
     };
 }
 
-
-function reducer(state, action) {
-    switch(action.type) {
-    case "test":
-        return Object.assign({}, state, {
-            testData: action.data
-        })
-        break;
-    }
-    return state;
+function counter(state = 0, action) {
+  switch (action.type) {
+  case 'INCREMENT':
+    return state + 1
+  case 'DECREMENT':
+    return state - 1
+  default:
+    return state
+  }
 }
 
-const { subscribe, getState, dispatch } = createStore(reducer, {})
+let store = createStore(counter)
 
-var unsubscribe = subscribe(() =>
-  console.log(getState()))
+store.subscribe(() =>
+  console.log(store.getState())
+)
 
-dispatch({
-    type: "test",
-    data: "data from action"
-})
+store.dispatch({ type: 'INCREMENT' })
+store.dispatch({ type: 'INCREMENT' })
+store.dispatch({ type: 'DECREMENT' })
