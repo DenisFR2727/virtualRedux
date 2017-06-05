@@ -1,12 +1,15 @@
 /* 
-You need node 6.9. 
-Run with:
-node redux-mini.js --harmony
+ You need node 6.9 or later. 
+ Run with:
+ node redux-mini.js --harmony
 
-More info in the blog post at http://blog.jakoblind.no/2017/03/13/learn-redux-by-coding-a-mini-redux/
+ Want a more in depth explanation of how things works? Read the blog post I have written about it here:
+ http://blog.jakoblind.no/2017/03/13/learn-redux-by-coding-a-mini-redux/
 */
 
-//Mini Redux implementation
+/* 
+ Mini Redux implementation
+*/
 function createStore(reducer, initialState) {
     var currentReducer = reducer;
     var currentState = initialState;
@@ -27,7 +30,10 @@ function createStore(reducer, initialState) {
     };
 }
 
-// Example usage
+/*
+ Example usage of our Mini Redux. 
+ Copy pasted from the Redux official github page: https://github.com/reactjs/redux#the-gist
+ */
 function counter(state = 0, action) {
   switch (action.type) {
   case 'INCREMENT':
