@@ -10,6 +10,7 @@
 /* 
  Mini Redux implementation
 */
+console.log(123)
 function createStore(reducer, initialState) {
     var currentReducer = reducer;
     var currentState = initialState;
