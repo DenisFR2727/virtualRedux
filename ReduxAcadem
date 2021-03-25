@@ -1,0 +1,68 @@
+///actionCreators
+const addStudent =(name,mark,university)=>({
+  type:'ADD_STUDENT',
+  paload:{
+    name,
+    mark,
+    university
+    
+  }
+})
+const editStudent =(name,mark)=>({
+  type:'EDIT_STUDENT',
+  paload:{
+    name,
+    mark
+    
+  }
+})
+const removeStudent =(name)=>({
+    type:'REMOVE_STUDENT',
+  paload:{
+    name
+  }
+})
+/// reducers
+
+const student = (students =[],action)=> {
+   if(action.type === 'ADD_STUDENT'){
+      return [...students, action.payload]
+   }else if(action.type === 'EDIT_STUDENT'){
+     return students.map( (student)=>{
+       if(student.name === action.payload.name){
+         return  {university: student.university
+                  ...action.payload
+                 };
+         
+       }
+        return {...student} 
+     });
+   }else if(action.type === 'REMOVE_STUDENT'){
+       return students.filter( (student)=> student.name !== action.payload.name)
+   }
+   return students;
+};
+
+const {createStore,combineReducers} = Redux;
+
+const allReducers = combineReducers({
+   students: students
+});
+
+const store = createStore(allReducers);
+
+console.log(store.getState())
+
+store.dispath(addStudent("Oleksandr",4,"KNUCA"));
+store.dispath(addStudent("Mykola",3,"KPI"));
+store.dispath(addStudent("Misha",5,"KNEU"));
+
+console.log(store.getState())
+
+store.dispath(editStudent("Oleksandr",5));
+
+console.log(store.getState())
+
+store.dispath(editStudent("Mykola",4));
+
+console.log(store.getState())
