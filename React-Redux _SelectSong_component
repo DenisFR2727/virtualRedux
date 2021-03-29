@@ -1,0 +1,44 @@
+import React from "react";
+// функция с самого редакса конект Импортируем 
+import {connect} from 'react-redux'
+// импортируем селект сонг из экшена
+import {selectSong} from '../actions/index'
+
+class SongsList extends React.Component{
+     renderList(){
+         const { songs, selectSong } = this.props
+        //  selectSong({}); //store.dispatch(selectedSong({}))
+         return songs.map((song)=>{
+             return (
+                <div key={song.title} className='item'>
+                    <div className='right floated content'>
+                        <button className="ui button primary" onClick={()=>selectSong(song)}>Select</button>
+                    </div>
+                    <div  className='left floated content'>{song.title}</div>
+                </div>
+
+             )
+         });
+     }
+      render(){
+      return <div className="ui divided list">{this.renderList()}</div>
+        // const myReducers = this.props.test.map((item,index)=>{
+        // return <div key={index}>{item.title}</div>
+        //     })
+        //   return <div>Sogs List
+        //        <div>{myReducers}</div>
+        //   </div>
+         
+      }
+}
+// обьект пропсов
+const mapStateToProps = (state) =>({
+     // присваеваем проперти songs - state
+       songs:state.songs
+})
+
+// во вторые скобки передаем наш клас SongList
+// connect - знает все про стейт
+export default connect(mapStateToProps,{
+    selectSong:selectSong
+})(SongsList)
